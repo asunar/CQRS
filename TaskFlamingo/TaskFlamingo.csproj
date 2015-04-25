@@ -164,11 +164,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\TaskRetriever.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Domain\TaskService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DashboardTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -287,7 +290,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="NewFolder2\" />
+    <Folder Include="NewFolder3\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

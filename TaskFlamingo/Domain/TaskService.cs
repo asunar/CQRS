@@ -14,10 +14,16 @@ namespace TaskFlamingo.Domain
       SaveTask(task);
     }
 
+    public SqlConnection GetOpenConnection()
+    {
+      var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+      return new SqlConnection(connectionString);
+    }
+
     private void SaveTask(Task task)
     {
       //save task command to db
-      using (var connection = GetOpenConnection())
+      using (var connection = this.GetOpenConnection())
       {
         connection.Execute(@"
             INSERT INTO [dbo].[Tasks]
@@ -63,10 +69,5 @@ namespace TaskFlamingo.Domain
       return task;
     }
 
-    public static SqlConnection GetOpenConnection()
-    {
-      var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-      return new SqlConnection(connectionString);
-    }
   }
 }

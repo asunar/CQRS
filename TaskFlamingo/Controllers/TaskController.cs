@@ -5,11 +5,14 @@ using TaskFlamingo.Domain;
 
 namespace TaskFlamingo.Controllers
 {
+  using TaskFlamingo.Data;
+  using TaskFlamingo.Models;
+
   public class TaskController : ApiController
   {
-    public ScheduleTaskDto Get(string id)
+    public IEnumerable<DashboardTask> Get(Guid personId)
     {
-      return new ScheduleTaskDto { Name = "moo" };
+      return new TaskRetriever().GetDashboardTasks(personId);
     }
 
     public void Post([FromBody]ScheduleTaskDto dto)

@@ -27,6 +27,7 @@ namespace TaskFlamingo.Domain
     Created,
     Completed,
     Canceled,
-    Tabled
+    Tabled,
+    Published
   }
 }
