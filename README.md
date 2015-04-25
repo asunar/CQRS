@@ -1,0 +1,2 @@
+# CQRS
+CQRS workshop
