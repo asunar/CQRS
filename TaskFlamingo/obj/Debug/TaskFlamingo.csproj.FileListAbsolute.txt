@@ -143,3 +143,6 @@ C:\code\cqrs\TaskFlamingo\obj\Debug\TaskFlamingo.csprojResolveAssemblyReference.
 C:\code\cqrs\TaskFlamingo\bin\Dapper.dll
 C:\code\cqrs\TaskFlamingo\bin\Dapper.pdb
 C:\code\cqrs\TaskFlamingo\bin\Dapper.xml
+C:\data\code\TaskFlamingo\TaskFlamingo\bin\Dapper.dll
+C:\data\code\TaskFlamingo\TaskFlamingo\bin\Dapper.pdb
+C:\data\code\TaskFlamingo\TaskFlamingo\bin\Dapper.xml
