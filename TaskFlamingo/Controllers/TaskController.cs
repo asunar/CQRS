@@ -31,6 +31,7 @@ namespace TaskFlamingo.Controllers
     {
         public void Handle(ScheduleTaskCommand command)
         {
+
         }
     }
 
