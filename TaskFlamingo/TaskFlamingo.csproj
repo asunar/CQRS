@@ -164,6 +164,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Data\PersonRetriever.cs" />
     <Compile Include="Domain\TaskRepository.cs" />
     <Compile Include="Domain\TaskService.cs" />
     <Compile Include="Domain\Task.cs" />

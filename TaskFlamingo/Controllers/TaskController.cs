@@ -19,10 +19,10 @@ namespace TaskFlamingo.Controllers
     }
 
     [HttpPost]
-    public void Publish(Guid id, [FromBody] CompleteTaskDto dto)
+    public void Complete(Guid id, [FromBody] CompleteTaskDto dto)
     {
       var taskService = new TaskService();
-      taskService.PublishTask(id, dto);
+      taskService.CompleteTask(id, dto);
     }
 
     // PUT api/values/5

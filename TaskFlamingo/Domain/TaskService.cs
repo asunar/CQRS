@@ -69,7 +69,7 @@ namespace TaskFlamingo.Domain
       return new SqlConnection(connectionString);
     }
 
-    public void PublishTask(Guid taskId, CompleteTaskDto dto)
+    public void CompleteTask(Guid taskId, CompleteTaskDto dto)
     {
       var repo = new TaskRepository();
       var task = repo.Get(taskId);

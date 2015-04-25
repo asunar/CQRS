@@ -45,7 +45,7 @@ namespace TaskFlamingo.Domain
       }
     }
 
-    public static SqlConnection GetOpenConnection()
+    public SqlConnection GetOpenConnection()
     {
       var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
       return new SqlConnection(connectionString);
