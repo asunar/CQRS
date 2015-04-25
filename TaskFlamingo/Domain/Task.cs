@@ -13,6 +13,18 @@ namespace TaskFlamingo.Domain
     public DateTime? CompletionDate { get; set; }
     public string CompletionComment { get; set; }
     public TaskStatus Status { get; set; }
+
+    public void Publish()
+    {
+      Status = TaskStatus.Published;
+    }
+
+    public void Complete(DateTime CompleteDate, string Comment)
+    {
+      CompletionDate = CompleteDate;
+      CompletionComment = Comment;
+      Status = TaskStatus.Completed;
+    }
   }
 
   public class Person

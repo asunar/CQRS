@@ -47,9 +47,7 @@ namespace TaskFlamingo.Domain
     {
       var repo = new TaskRepository();
       var task = repo.Get(taskId);
-      task.Status = TaskStatus.Completed;
-      task.CompletionDate = dto.CompleteDate;
-      task.CompletionComment = dto.CompleteComment;
+      task.Complete(dto.CompleteDate, dto.CompleteComment);
       repo.Update(task);
     }
 
@@ -57,7 +55,7 @@ namespace TaskFlamingo.Domain
     {
       var repo = new TaskRepository();
       var task = repo.Get(taskId);
-      task.Status = TaskStatus.Published;
+      task.Publish();
       repo.Update(task);
     }
   }
