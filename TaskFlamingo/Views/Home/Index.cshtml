@@ -4,15 +4,24 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        <input type="button" value="Schedule Task"/>
+        <input type="button" value="Schedule Task" id="scheduleTaskButton"/>
     </section>
+</div>
+<div id="scheduleTask">
+    <form id="scheduleTaskForm">
+        <label>Name:</label>
+        <input type="text" id="taskName"/>
+    </form>
 </div>
 
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            alert('moo');
+        $(document).ready(function () {
+            $("#scheduleTask").dialog();
+            $("#scheduleTaskButton").click(function() {
+                
+            });
         });
     </script>
 }
