@@ -68,5 +68,15 @@ namespace TaskFlamingo.Domain
       var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
       return new SqlConnection(connectionString);
     }
+
+    public void PublishTask(Guid taskId, CompleteTaskDto dto)
+    {
+      var repo = new TaskRepository();
+      var task = repo.Get(taskId);
+      task.Status = TaskStatus.Completed;
+      task.CompletionDate = dto.CompleteDate;
+      task.CompletionComment = dto.CompleteComment;
+      repo.Update(task);
+    }
   }
 }

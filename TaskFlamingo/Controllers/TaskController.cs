@@ -18,6 +18,13 @@ namespace TaskFlamingo.Controllers
       taskService.ScheduleTask(dto);
     }
 
+    [HttpPost]
+    public void Publish(Guid id, [FromBody] CompleteTaskDto dto)
+    {
+      var taskService = new TaskService();
+      taskService.PublishTask(id, dto);
+    }
+
     // PUT api/values/5
     public void Put(int id, [FromBody]string value)
     {
@@ -27,6 +34,12 @@ namespace TaskFlamingo.Controllers
     public void Delete(int id)
     {
     }
+  }
+
+  public class CompleteTaskDto
+  {
+    public DateTime CompleteDate { get; set; }
+    public string CompleteComment { get; set; }
   }
 
   public class ScheduleTaskDto
