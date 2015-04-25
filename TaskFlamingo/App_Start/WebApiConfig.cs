@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace TaskFlamingo
@@ -13,6 +10,14 @@ namespace TaskFlamingo
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                name: "TaskApi",
+                routeTemplate: "api/{controller}/{id}/complete"
+            );
+            config.Routes.MapHttpRoute(
+                name: "TaskApi",
+                routeTemplate: "api/{controller}/{id}/publish"
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
