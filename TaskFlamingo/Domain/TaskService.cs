@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Transactions;
 using Dapper;
 using TaskFlamingo.Controllers;
 
@@ -17,9 +18,11 @@ namespace TaskFlamingo.Domain
     private void SaveTask(Task task)
     {
       //save task command to db
-      using (var connection = GetOpenConnection())
+      using (var scope = new TransactionScope(TransactionScopeOption.Required))
       {
-        connection.Execute(@"
+        using (var connection = GetOpenConnection())
+        {
+          connection.Execute(@"
             INSERT INTO [dbo].[Tasks]
                        ([TaskId]
                        ,[Name]
@@ -36,16 +39,25 @@ namespace TaskFlamingo.Domain
                        ,@status
                        ,@completionDate
                        ,@completionComment)",
-          new
+            new
+            {
+              taskId = task.TaskId,
+              name = task.Name,
+              dueDate = task.DueDate,
+              instructions = task.Instructions,
+              status = task.Status,
+              completionDate = task.CompletionDate,
+              completionComment = task.CompletionComment
+            });
+
+          foreach (var assignee in task.Assignees)
           {
-            taskId = task.TaskId,
-            name = task.Name,
-            dueDate = task.DueDate,
-            instructions = task.Instructions,
-            status = task.Status,
-            completionDate = task.CompletionDate,
-            completionComment = task.CompletionComment
-          });
+            connection.Execute(@"INSERT INTO Tasks_People (TaskId, PersonId) VALUES (@taskId, @personId)",
+              new {taskId = task.TaskId, personId = assignee.PersonId});
+          }
+        }
+
+        scope.Complete();
       }
     }
 
@@ -60,6 +72,15 @@ namespace TaskFlamingo.Domain
         Instructions = dto.Instructions,
         CompletionDate = null
       };
+      var personRepo = new PersonRepository();
+      foreach (var personId in dto.Assignees)
+      {
+        var person = personRepo.Get(personId);
+        if (person != null)
+        {
+          task.Assignees.Add(person);
+        }
+      }
       return task;
     }
 

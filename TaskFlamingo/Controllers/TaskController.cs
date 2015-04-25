@@ -25,15 +25,6 @@ namespace TaskFlamingo.Controllers
       taskService.CompleteTask(id, dto);
     }
 
-    // PUT api/values/5
-    public void Put(int id, [FromBody]string value)
-    {
-    }
-
-    // DELETE api/values/5
-    public void Delete(int id)
-    {
-    }
   }
 
   public class CompleteTaskDto
@@ -47,7 +38,7 @@ namespace TaskFlamingo.Controllers
     public string Name { get; set; }
     public string Instructions { get; set; }
     public DateTime DueDate { get; set; }
-    public List<string> Assignees { get; set; }
+    public List<Guid> Assignees { get; set; }
   }
 
 }
