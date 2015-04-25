@@ -9,7 +9,7 @@
     <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
   </configSections>
   <connectionStrings>
-    <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-TaskFlamingo-20150425105135;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-TaskFlamingo-20150425105135.mdf" />
+    <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Server=localhost\sqlexpress2014;Database=TaskFlamingo;Integrated Security=True;" />
   </connectionStrings>
   <appSettings>
     <add key="webpages:Version" value="2.0.0.0" />

@@ -5,6 +5,7 @@ CREATE TABLE [dbo].[Tasks](
 	[Instructions] [ntext] NULL,
 	[CompletionDate] [datetime] NULL,
 	[CompletionComment] [ntext] NULL,
+	[Status] [int] NOT NULL
  CONSTRAINT [PK_Tasks] PRIMARY KEY CLUSTERED 
 (
 	[TaskId] ASC

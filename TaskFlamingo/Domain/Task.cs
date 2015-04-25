@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+
+namespace TaskFlamingo.Domain
+{
+  public class Task
+  {
+    public Guid TaskId { get; set; }
+    public string Name { get; set; }
+    public DateTime DueDate { get; set; }
+    public string Instructions { get; set; }
+    public List<Person> Assignees { get; set; }
+    public DateTime? CompletionDate { get; set; }
+    public string CompletionComment { get; set; }
+    public TaskStatus Status { get; set; }
+  }
+
+  public class Person
+  {
+    public Guid PersonId { get; set; }
+    public string Name { get; set; }
+    public bool IsSupervisor { get; set; }
+  }
+
+  public enum TaskStatus
+  {
+    Created,
+    Completed,
+    Canceled,
+    Tabled
+  }
+}

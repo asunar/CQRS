@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Http;
+using TaskFlamingo.Domain;
 
 namespace TaskFlamingo.Controllers
 {
@@ -37,6 +39,7 @@ namespace TaskFlamingo.Controllers
   {
     public void Handle(ScheduleTaskCommand command)
     {
+      var task = CreateTaskFrom(command.ScheduleTaskDto);
       //save task command to db
       using (var connection = GetOpenConnection())
       {
@@ -45,19 +48,47 @@ namespace TaskFlamingo.Controllers
                        ([TaskId]
                        ,[Name]
                        ,[DueDate]
-                       ,[Instructions])
+                       ,[Instructions]
+                       ,[Status]
+                       ,[CompletionDate]
+                       ,[CompletionComment])
                  VALUES
                        (@taskId
                        ,@name
                        ,@dueDate
-                       ,@instructions)", new { taskId = Guid.NewGuid(), name = command.ScheduleTaskDto.Name, dueDate = command.ScheduleTaskDto.DueDate, instructions = command.ScheduleTaskDto.Instructions });
+                       ,@instructions
+                       ,@status
+                       ,@completionDate
+                       ,@completionComment)", 
+                                 new { taskId = task.TaskId, 
+                                   name = task.Name, 
+                                   dueDate = task.DueDate, 
+                                   instructions = task.Instructions,
+                                   status = task.Status,
+                                   completionDate = task.CompletionDate,
+                                   completionComment = task.CompletionComment});
       }
 
     }
 
+    private Task CreateTaskFrom(ScheduleTaskDto dto)
+    {
+      var task = new Task
+      {
+        TaskId = Guid.NewGuid(),
+        Name = dto.Name,
+        DueDate = dto.DueDate,
+        Status = TaskStatus.Created,
+        Instructions = dto.Instructions,
+        CompletionDate = null
+      };
+      return task;
+    }
+
     public static SqlConnection GetOpenConnection()
     {
-      return new SqlConnection(@"Server=localhost\sqlserver2014;Database=TaskFlamingo;Integrated Security=True;");
+      var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+      return new SqlConnection(connectionString);
     }
   }
 
