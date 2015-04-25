@@ -12,12 +12,14 @@ namespace TaskFlamingo
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Routes.MapHttpRoute(
-                name: "TaskApi",
-                routeTemplate: "api/{controller}/{id}/complete"
+                name: "Complete",
+                routeTemplate: "api/{controller}/{id}/Complete",
+                defaults: new { controller = "Task", action = "Complete"}
             );
             config.Routes.MapHttpRoute(
-                name: "TaskApi",
-                routeTemplate: "api/{controller}/{id}/publish"
+                name: "Publish",
+                routeTemplate: "api/{controller}/{id}/Publish",
+                defaults: new { controller = "Task", action = "Publish"}
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

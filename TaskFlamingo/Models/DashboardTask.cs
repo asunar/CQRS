@@ -11,6 +11,11 @@ namespace TaskFlamingo.Models
     public DateTime DueDate { get; set; }
 
     public Status Status { get; set; }
+
+    public string StatusText
+    {
+      get { return Status.ToString(); }
+    }
   }
 
   public enum Status

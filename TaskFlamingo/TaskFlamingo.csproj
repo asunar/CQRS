@@ -175,7 +175,6 @@
     <Compile Include="Data\PersonRetriever.cs" />
     <Compile Include="Domain\PersonRepository.cs" />
     <Compile Include="Domain\TaskRepository.cs" />
-    <Compile Include="Domain\TaskService.cs" />
     <Compile Include="Data\TaskRetriever.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Controllers\TaskController.cs" />

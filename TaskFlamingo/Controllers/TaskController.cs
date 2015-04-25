@@ -28,6 +28,13 @@ namespace TaskFlamingo.Controllers
       taskService.CompleteTask(id, dto);
     }
 
+    [HttpPost]
+    public void Publish(Guid id)
+    {
+      var taskService = new TaskService();
+      taskService.PublishTask(id);
+    }
+
   }
 
   public class CompleteTaskDto
