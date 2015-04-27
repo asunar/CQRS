@@ -97,6 +97,5 @@ namespace TaskFlamingo.Domain
       var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
       return new SqlConnection(connectionString);
     }
-
   }
 }

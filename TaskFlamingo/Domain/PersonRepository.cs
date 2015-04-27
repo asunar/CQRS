@@ -35,5 +35,20 @@ namespace TaskFlamingo.Domain
       return new SqlConnection(connectionString);
     }
 
+    public void SavePerson(Person p)
+    {
+      using (var connection = GetOpenConnection())
+      {
+        connection.Execute(
+          @"
+            INSERT [dbo].[People] (
+            [PersonId], 
+            [Name], 
+            [IsSupervisor]) 
+            VALUES (@personId, @name, @isSupervisor)",
+          new { personId = p.PersonId, name = p.Name, isSupervisor = p.IsSupervisor });
+      }
+    }
+
   }
 }

@@ -7,35 +7,83 @@ using TaskFlamingo.Domain;
 
 namespace TaskFlamingo.Tests
 {
+  using System.Configuration;
+  using System.Data.SqlClient;
+
+  using Dapper;
+
   [TestFixture]
   public class DataGenerator
   {
-    [Test]
-    public void generate_random_tasks()
+    private SqlConnection GetOpenConnection()
     {
-      var fixture = new Fixture();
-      var repo = new TaskRepository();
+      var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+      return new SqlConnection(connectionString);
+    }
+
+    [Test]
+    public void RefreshDatabase()
+    {
+      this.ClearDatabase();
+      this.GeneratePeople();
+    }
+
+    private void GeneratePeople()
+    {
+      var people = new List<Person>()
+                     {
+                       new Person() { Name = "John Created" },
+                       new Person() { Name = "Jack Completed" },
+                       new Person() { Name = "Sally Canceled" },
+                       new Person() { Name = "Harry Tabled" },
+                       new Person() { Name = "Jane Published" },
+                       new Person() { Name = "Joe Supervisor", IsSupervisor = true},
+                     };
+
       var personRepo = new PersonRepository();
-      var people = personRepo.GetAll();
-      var tasks = fixture.Build<Task>()
-        .With(t => t.Assignees, GetRandomAssignees(people))
-        .CreateMany(50);
-      foreach (var task in tasks)
+      var taskRepo = new TaskRepository();
+      foreach (var person in people)
       {
-        repo.SaveTask(task);
+        personRepo.SavePerson(person);
+        TaskStatus taskStatus;
+        Enum.TryParse(person.Name.Split()[1], out taskStatus);
+
+        for (int i = 1; i < 3; i++)
+        {
+          taskRepo.SaveTask(new Task()
+          {
+            Name = "Task " + i,
+            Assignees = (new[] { person }).ToList(),
+            Status = taskStatus,
+            CompletionComment = taskStatus == TaskStatus.Completed ? "Completed by " + person.Name : null,
+            CompletionDate = taskStatus == TaskStatus.Completed ? DateTime.Today.AddDays(-1 * i) : default(DateTime?),
+            DueDate = DateTime.Today.AddMonths(i),
+            Instructions = "Instructions " + i,
+          });
+        }
+      }
+
+
+
+
+
+
+    }
+
+    private void ClearDatabase()
+    {
+      var sql = @"
+      DELETE FROM dbo.Tasks_People
+      DELETE FROM dbo.Tasks
+      DELETE FROM dbo.People
+";
+
+      using (var connection = this.GetOpenConnection())
+      {
+        connection.Execute(sql);
       }
     }
 
-    private List<Person> GetRandomAssignees(IEnumerable<Person> people)
-    {
-      var random = new Random(DateTime.Now.Millisecond);
-      var numberOfPeople = random.Next(Math.Min(3, people.Count()));
-      var assignees = new List<Person>();
-      for (var i = 0; i < numberOfPeople; i++)
-      {
-        assignees.Add(people.ElementAt((numberOfPeople + i)%people.Count()));
-      }
-      return assignees;
-    }
+
   }
 }

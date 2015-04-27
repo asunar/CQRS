@@ -5,6 +5,10 @@ namespace TaskFlamingo.Domain
 {
   public class Task
   {
+    public Task()
+    {
+      this.TaskId = Guid.NewGuid();
+    }
     public Guid TaskId { get; set; }
     public string Name { get; set; }
     public DateTime DueDate { get; set; }
@@ -29,6 +33,10 @@ namespace TaskFlamingo.Domain
 
   public class Person
   {
+    public Person()
+    {
+      this.PersonId = Guid.NewGuid();
+    }
     public Guid PersonId { get; set; }
     public string Name { get; set; }
     public bool IsSupervisor { get; set; }
