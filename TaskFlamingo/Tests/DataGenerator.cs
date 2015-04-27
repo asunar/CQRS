@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+
 using TaskFlamingo.Domain;
 
 namespace TaskFlamingo.Tests
