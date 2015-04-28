@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TaskFlamingo.UI.Models.TaskListItem>
+
+<h2>My Tasks</h2>
+<table class="table">
+  <th>Name</th>
+  <th>Due Date</th>
+  <th>Status</th>
+  @foreach (var task in Model)
+  {
+    <tr>
+      <td>@task.Name</td>
+      <td>@task.DueDate</td>
+      <td>@task.Status</td>
+    </tr>
+  }
+</table>
