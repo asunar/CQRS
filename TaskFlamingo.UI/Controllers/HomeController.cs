@@ -6,11 +6,14 @@ using System.Web.Mvc;
 
 namespace TaskFlamingo.UI.Controllers
 {
+  using TaskFlamingo.UI.Services;
+
   public class HomeController : Controller
   {
     public ActionResult Index()
     {
-      return View();
+      var people = new PersonService().GetAllPeopleAsync().Result;
+      return View(people);
     }
 
     public ActionResult About()

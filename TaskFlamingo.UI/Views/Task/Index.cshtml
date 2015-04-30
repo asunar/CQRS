@@ -1,6 +1,9 @@
-﻿@model IEnumerable<TaskFlamingo.UI.Models.TaskListItem>
+﻿@using TaskFlamingo.UI.Models
+@model IEnumerable<TaskListItem>
 
-<h2>My Tasks</h2>
+
+
+<h2>My Tasks </h2>
 <table class="table">
   <th>Name</th>
   <th>Due Date</th>
@@ -10,7 +13,7 @@
     <tr>
       <td>@task.Name</td>
       <td>@task.DueDate</td>
-      <td>@task.Status</td>
+      <td>@task.StatusText</td>
     </tr>
   }
 </table>

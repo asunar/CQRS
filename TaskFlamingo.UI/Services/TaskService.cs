@@ -12,7 +12,7 @@
   {
     private const string HOST = "http://localhost:49445/";
 
-    public async Task<IEnumerable<TaskListItem>> GetMyTasksAsync(string personId = "423B9090-2092-47EE-943B-3BBE1EC4ABEB")
+    public async Task<IEnumerable<TaskListItem>> GetMyTasksAsync(Guid personId)
     {
         using (var client = new HttpClient())
         {

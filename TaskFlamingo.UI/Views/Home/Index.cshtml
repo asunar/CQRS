@@ -1,12 +1,30 @@
-﻿@{
+﻿@using TaskFlamingo.UI.Models
+@{
     ViewBag.Title = "Home Page";
 }
+
+
+
+<span>I am</span> <span>
+  <select id="personId">
+    @foreach (Person person in Model)
+    {
+      <option id="@person.PersonId" value="@person.PersonId">@person.Name</option>
+    }
+  </select>
+</span>
+
+
+
+
+
+
 
 <div class="row">
   <table>
     <tr>
       <td>
-        @Html.ActionLink("My Tasks", "Index", "Task")
+        <a id="myTasks" href="#">My Tasks</a>
       </td>
     </tr>
     
@@ -29,3 +47,23 @@
     </tr>
   </table>
 </div>
+
+<script type="text/javascript">
+  function getPersonId() {
+    var personIdControl = document.getElementById("personId");
+    return personIdControl.options[personIdControl.selectedIndex].value;
+  }
+
+  function SetLinks() {
+    var myTasks = document.getElementById('myTasks');
+    console.log();
+
+    myTasks.addEventListener("click", function () {
+      var baseUrl = '@Url.Action("Index", "Task")'; // TODO: strongly typed
+      location.href = baseUrl + "?personId=" + getPersonId();
+    } );
+
+
+  }
+  SetLinks();
+</script>
