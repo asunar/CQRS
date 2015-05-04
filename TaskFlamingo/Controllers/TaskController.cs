@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using TaskFlamingo.Domain;
 
@@ -16,6 +17,7 @@ namespace TaskFlamingo.Controllers
       return new TaskRetriever().GetDashboardTasks(personId);
     }
 
+    [Route("api/tasks/create")]
     public void Post([FromBody]ScheduleTaskDto dto)
     {
       var taskService = new TaskService();
@@ -46,9 +48,13 @@ namespace TaskFlamingo.Controllers
 
   public class ScheduleTaskDto
   {
+      public ScheduleTaskDto()
+      {
+          this.Assignees = Enumerable.Empty<Guid>().ToList();
+      }
     public string Name { get; set; }
     public string Instructions { get; set; }
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
     public List<Guid> Assignees { get; set; }
   }
 

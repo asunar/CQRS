@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 using TaskFlamingo.Controllers;
 
 namespace TaskFlamingo.Domain
@@ -32,6 +35,7 @@ namespace TaskFlamingo.Domain
         CompletionDate = null
       };
       var personRepo = new PersonRepository();
+        dto.Assignees = dto.Assignees;
       foreach (var personId in dto.Assignees)
       {
         var person = personRepo.Get(personId);

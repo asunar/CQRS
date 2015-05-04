@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TaskFlamingo.Domain
 {
@@ -8,10 +9,11 @@ namespace TaskFlamingo.Domain
     public Task()
     {
       this.TaskId = Guid.NewGuid();
+        this.Assignees = Enumerable.Empty<Person>().ToList();
     }
     public Guid TaskId { get; set; }
     public string Name { get; set; }
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
     public string Instructions { get; set; }
     public List<Person> Assignees { get; set; }
     public DateTime? CompletionDate { get; set; }
