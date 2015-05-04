@@ -5,11 +5,12 @@ using TaskFlamingo.Domain;
 
 namespace TaskFlamingo.Controllers
 {
-  using TaskFlamingo.Data;
-  using TaskFlamingo.Models;
+  using Data;
+  using Models;
 
   public class TaskController : ApiController
   {
+    [Route("api/tasks")]
     public IEnumerable<DashboardTask> Get(Guid personId)
     {
       return new TaskRetriever().GetDashboardTasks(personId);

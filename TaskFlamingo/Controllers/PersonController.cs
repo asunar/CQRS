@@ -5,13 +5,15 @@ using TaskFlamingo.Data;
 
 namespace TaskFlamingo.Controllers
 {
+  
   public class PersonController : ApiController
   {
-    public IEnumerable<PersonListItem> Get()
-    {
-      var personRetriever = new PersonRetriever();
-      return personRetriever.GetAll();
-    }
+      [Route("api/people")]
+      public IEnumerable<PersonListItem> Get()
+      {
+          var personRetriever = new PersonRetriever();
+          return personRetriever.GetAll();
+      }
   }
 
   public class PersonListItem

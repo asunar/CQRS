@@ -20,7 +20,7 @@
         client.DefaultRequestHeaders.Accept.Clear();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        var response = await client.GetAsync("api/person").ConfigureAwait(false); ;
+        var response = await client.GetAsync("api/people").ConfigureAwait(false); ;
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsAsync<Person[]>();
       }
